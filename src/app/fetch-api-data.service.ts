@@ -9,7 +9,9 @@ const apiUrl = 'https://borchers-movie-api.herokuapp.com/';
 // Get token from local storage
 const token = localStorage.getItem('token');
 // Get Username from local storage
-const username = localStorage.getItem('user')
+const username = localStorage.getItem('user');
+
+// Decorator that makes the "FetchApiDataService" service available anywhere in the app.
 @Injectable({
   providedIn: 'root'
 })
@@ -22,20 +24,20 @@ export class FetchApiDataService {
   	constructor(private http: HttpClient) { }
 
   	// Api call for creating new user
-  	public userRegistration(userDetails: any): Observable<any> {
-		console.log(userDetails);
-		return this.http.post(apiUrl + 'users', userDetails).pipe(
+  	public userRegistration(userData: any): Observable<any> {
+		console.log(userData);
+		return this.http.post(apiUrl + 'users', userData).pipe(
 	  		catchError(this.handleError)
 		);
   	}
 
 
 	// Api call for the user login endpoint
-	public userLogin(userDetails: any): Observable<any> {
-		console.log(userDetails);
+	public userLogin(userData: any): Observable<any> {
+		console.log(userData);
 		return this.http.post(
-			apiUrl + 'login',
-			userDetails
+			apiUrl + 'users',
+			userData
 		)
 		.pipe(
 			catchError(this.handleError)
@@ -96,6 +98,22 @@ export class FetchApiDataService {
 		const token = localStorage.getItem('token');
 		return this.http.get(
 			apiUrl + `movies/genres/${genre}`,
+			{headers: new HttpHeaders(
+				{
+					Authorization: `Bearer ${token}`,
+				}
+			)}
+		).pipe(
+			map(this.extractResponseData),
+			catchError(this.handleError)
+		);
+	}
+
+  // Api call to fetch the user's details
+	public getUser(username: string): Observable<any> {
+		const token = localStorage.getItem('token');
+		return this.http.get(
+			apiUrl + `users/${username}`,
 			{headers: new HttpHeaders(
 				{
 					Authorization: `Bearer ${token}`,
@@ -189,4 +207,5 @@ export class FetchApiDataService {
 			return throwError('Please try again later.')
 		}
   	}
+    
 }
