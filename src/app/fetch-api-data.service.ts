@@ -47,7 +47,7 @@ export class FetchApiDataService {
 
 
 // Api call to fetch all movies
-	public getMovies(): Observable<any> {
+	public getAllMovies(): Observable<any> {
 		const token = localStorage.getItem('token');
 		return this.http.get(
 			apiUrl + 'movies',
