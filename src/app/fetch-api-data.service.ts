@@ -3,7 +3,7 @@ import { catchError } from 'rxjs/internal/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
-import  Config  from 'src/config';
+// import  Config from 'src/config';
 
 //Declaring the api url that will provide data for the client app
 const apiUrl = 'https://borchers-movie-api.herokuapp.com/';
