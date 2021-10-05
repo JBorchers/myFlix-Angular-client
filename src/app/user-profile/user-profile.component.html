@@ -1,1 +1,18 @@
-<p>user-profile works!</p>
+<app-nav-bar></app-nav-bar>
+<!-- <br> <br> <br> -->
+
+<div class="profile-container">
+  <img class="profile-pic" src="https://via.placeholder.com/150" />
+  <h1>{{ user.Username }}</h1>
+  <p class="meta">birthday: {{ user.Birthday }}</p>
+  <h3>{{ user.Email }}</h3>
+  <div>
+  <button class='accnt-btn' mat-raised-button>
+    Edit Account
+  </button>
+  <button class='accnt-btn' mat-raised-button>
+    Delete Account
+  </button></div>
+
+</div>
+
