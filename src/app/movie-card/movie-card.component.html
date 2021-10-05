@@ -1,4 +1,5 @@
 <!-- ngFor is the directive used to display all returned movies--each movie is displayed in its own card -->
+<app-nav-bar></app-nav-bar>
 <div style="display: flex;">
 <!-- <mat-card *ngFor="let movie of movies; let i=index;"  -->
 <mat-card *ngFor="let movie of movies;" style="flex: 1 1 auto;">
@@ -23,7 +24,8 @@
                 Director
             </button>
             <button
-                mat-button
+                mat-stroked-button
+                (click)="openMovieSynopsis(movie.Title, movie.Description, movie.ImagePath)"
                 color="primary"
             >
                 Synopsis
