@@ -1,0 +1,14 @@
+<h1 mat-dialog-title >{{ data.Title }}</h1> <br>
+<div class=container>
+<div class="image">
+    <img mat-card-image src={{data.ImagePath}} >
+</div> <br>
+<div mat-dialog-content>
+    <h3>Synopsis:</h3>
+    <p>{{ data.description }}</p> <br>
+</div>
+</div>
+<!-- <div mat-dialog-actions> -->
+<div class="close-btn"><button mat-icon-button aria-label="Close the director details button" mat-dialog-close color="primary">
+    Close
+  </button></div>
