@@ -3,6 +3,7 @@ import { catchError } from 'rxjs/internal/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 // import  Config from 'src/config';
 
 //Declaring the api url that will provide data for the client app
@@ -22,7 +23,7 @@ const username = localStorage.getItem('user');
 export class FetchApiDataService {
  // Inject the HttpClient module to the constructor params.
   	// This will provide HttpClient to the entire class, making it available via this.http .
-  	constructor(private http: HttpClient) { }
+  	constructor(private http: HttpClient, private router: Router) { }
 
   	// Api call for creating new user
   	public userRegistration(userData: any): Observable<any> {
