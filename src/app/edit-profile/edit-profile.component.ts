@@ -10,7 +10,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class EditProfileComponent implements OnInit {
 
-  @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
+  @Input() newUser = { Username: '', Password: '', Email: '', Birthday: '' };
+
+  username = JSON.parse(localStorage.getItem('user')!).username;
 
 constructor(
     public fetchApiData: FetchApiDataService,
@@ -22,16 +24,20 @@ ngOnInit(): void {
 
 // function responsible for sending form inputs to backend
   updateUser(): void {
-    this.fetchApiData.userRegistration(this.userData).subscribe((result) => {
-      // Logic for successful user registration needs to be implemented here!
-      this.dialogRef.close(); // will close the modal on success
-      this.snackBar.open(result, 'OK', {
-        duration: 2000
-      });
-    }, (result) => {
-      this.snackBar.open(result, 'OK', {
-        duration: 2000
-      });
-    });
-  }
-  }
+		this.fetchApiData.updateUser(this.username, this.newUser).subscribe(response => {
+			localStorage.setItem('username', JSON.stringify(response));
+			this.snackBar.open('Your credentials have been updated', 'OK', {
+				duration: 2000,
+			})
+		}, (response) => {
+			console.log(response);
+			this.snackBar.open('Try again', 'OK', {
+				duration: 2000,
+			})
+		})
+		setTimeout(() => {
+			window.location.reload();
+		}, 1000)
+	}
+
+}
