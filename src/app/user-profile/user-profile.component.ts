@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { FetchApiDataService } from '../fetch-api-data.service';
+import { EditProfileComponent } from '../edit-profile/edit-profile.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -33,3 +34,4 @@ export class UserProfileComponent implements OnInit {
     // });
   }
 }
+

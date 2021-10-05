@@ -29,6 +29,7 @@ import { MovieGenreComponent } from './movie-genre/movie-genre.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MovieSynopsisComponent } from './movie-synopsis/movie-synopsis.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -49,7 +50,8 @@ const appRoutes: Routes = [
     MovieGenreComponent,
     UserProfileComponent,
     NavBarComponent,
-    MovieSynopsisComponent
+    MovieSynopsisComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
