@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { MovieGenreComponent } from '../movie-genre/movie-genre.component';
 import { MovieDirectorComponent } from '../movie-director/movie-director.component';
+import { MovieSynopsisComponent } from '../movie-synopsis/movie-synopsis.component';
 
 
 @Component({
@@ -47,5 +48,12 @@ getMovies(): void {
       data: {name, bio, birthyear},
       width: '650px'
     })
+  }
+
+  openMovieSynopsis(Title: string, description: string, imagePath: any): void {
+    this.dialog.open(MovieSynopsisComponent, {
+      data: { Title, description, ImagePath: imagePath },
+      width: '650px'
+    });
   }
 }
