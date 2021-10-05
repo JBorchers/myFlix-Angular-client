@@ -30,6 +30,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MovieSynopsisComponent } from './movie-synopsis/movie-synopsis.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -51,7 +52,8 @@ const appRoutes: Routes = [
     UserProfileComponent,
     NavBarComponent,
     MovieSynopsisComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    FavoritesComponent
   ],
   imports: [
     BrowserModule,
