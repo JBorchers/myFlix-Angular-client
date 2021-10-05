@@ -33,5 +33,11 @@ export class UserProfileComponent implements OnInit {
     //   this.user = res;
     // });
   }
+  
+  openUserUpdateDialog(): void {
+    this.dialog.open(EditProfileComponent, {
+      width: '400px'
+    });
+  }
 }
 

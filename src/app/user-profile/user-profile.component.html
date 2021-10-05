@@ -7,7 +7,8 @@
   <p class="meta">birthday: {{ user.Birthday }}</p>
   <h3>{{ user.Email }}</h3>
   <div>
-  <button class='accnt-btn' mat-raised-button>
+  <button class='accnt-btn' mat-raised-button
+    (click)="openUserUpdateDialog()">
     Edit Account
   </button>
   <button class='accnt-btn' mat-raised-button>
