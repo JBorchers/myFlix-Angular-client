@@ -82,9 +82,9 @@ getMovies(): void {
   }
 
   getUsersFavs(): void {
-    const user = localStorage.getItem('username');
-    this.fetchApiData.getUser(user).subscribe((resp: any) => {
-      this.faves = resp.Favorites;
+    const username = localStorage.getItem('username');
+    this.fetchApiData.getUser(username).subscribe((resp: any) => {
+      this.faves = resp.FavoriteMovies;
       console.log(this.faves);
       return this.faves;
     });

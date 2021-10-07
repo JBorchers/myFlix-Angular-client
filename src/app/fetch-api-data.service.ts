@@ -145,7 +145,7 @@ export class FetchApiDataService {
    public addToFavoriteMoviesList(id: string): Observable<any> {
     const user = localStorage.getItem('username');
     const token = localStorage.getItem('token');
-    return this.http.post(apiUrl + `users/${username}/movies/` + id, null, {
+    return this.http.post(apiUrl + `users/${user}/Movies/` + id, null, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
@@ -159,7 +159,7 @@ export class FetchApiDataService {
 	removeFavoriteMovie(id: string): Observable<any> {
     const user = localStorage.getItem('username');
     const token = localStorage.getItem('token');
-    return this.http.delete(apiUrl + `users/${username}/movies/` + id, {
+    return this.http.delete(apiUrl + `users/${user}/Movies/` + id, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
@@ -204,8 +204,10 @@ export class FetchApiDataService {
 	}
 
 	// Api call to update user's info
-	public updateUser(username: string, newUser: any): Observable<any> {
+	public updateUser(newUser: any): Observable<any> {
 		const token = localStorage.getItem('token');
+		const username = localStorage.getItem('username');
+		console.log(newUser);
 		return this.http.put(
 			apiUrl + `users/${username}`,
 			newUser,
