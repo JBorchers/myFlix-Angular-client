@@ -37,7 +37,8 @@ const appRoutes: Routes = [
   { path: 'movies', component: MovieCardComponent },
   // redirected to welcome page by default
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
-  { path: 'profile', component: UserProfileComponent }
+  { path: 'profile', component: UserProfileComponent },
+  { path: 'favorites', component: FavoritesComponent }
 ];
 
 @NgModule({

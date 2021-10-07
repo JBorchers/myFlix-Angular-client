@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MovieGenreComponent } from '../movie-genre/movie-genre.component';
 import { MovieDirectorComponent } from '../movie-director/movie-director.component';
 import { MovieSynopsisComponent } from '../movie-synopsis/movie-synopsis.component';
+import { FavoritesComponent } from '../favorites/favorites.component';
 
 
 @Component({
@@ -17,6 +18,8 @@ import { MovieSynopsisComponent } from '../movie-synopsis/movie-synopsis.compone
 
 export class MovieCardComponent {
   movies: any[] = [];
+  faves: any[] = []
+  
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -26,6 +29,7 @@ export class MovieCardComponent {
 
 ngOnInit(): void {
   this.getMovies();
+  this.getUsersFavs();
 }
 
 getMovies(): void {
@@ -56,4 +60,43 @@ getMovies(): void {
       width: '650px'
     });
   }
+
+  addToFavoriteMoviesList(id: string, Title: string): void {
+    this.fetchApiData.addToFavoriteMoviesList(id).subscribe((res: any) => {
+      // let favMovies = res.Favorites;
+      this.snackBar.open(`${Title} has been added to favorties`, 'OK', {
+        duration: 3000,
+      })
+      return this.getUsersFavs();
+    })
+  }
+
+  removeFromFavorites(id: string, Title: string): void {
+   this.fetchApiData.removeFavoriteMovie(id).subscribe((res: any) => {
+    //  let favMovies = res.Favorites;
+     this.snackBar.open(`${Title} has been removed from favorties`, 'OK', {
+       duration: 3000,
+     })
+     return this.getUsersFavs();
+   })
+  }
+
+  getUsersFavs(): void {
+    const user = localStorage.getItem('username');
+    this.fetchApiData.getUser(user).subscribe((resp: any) => {
+      this.faves = resp.Favorites;
+      console.log(this.faves);
+      return this.faves;
+    });
+  }
+
+  setFaveStatus(id: any): any {
+    if (this.faves.includes(id)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
 }
