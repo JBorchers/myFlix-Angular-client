@@ -12,7 +12,7 @@ export class EditProfileComponent implements OnInit {
 
   @Input() newUser = { Username: '', Password: '', Email: '', Birthday: '' };
 
-  username = JSON.parse(localStorage.getItem('user')!).username;
+ 
 
 constructor(
     public fetchApiData: FetchApiDataService,
@@ -24,8 +24,9 @@ ngOnInit(): void {
 
 // function responsible for sending form inputs to backend
   updateUser(): void {
-		this.fetchApiData.updateUser(this.username, this.newUser).subscribe(response => {
-			localStorage.setItem('username', JSON.stringify(response));
+		this.fetchApiData.updateUser(this.newUser).subscribe(response => {
+      console.log(response);
+			localStorage.setItem('username', JSON.stringify(response.user.Username));
 			this.snackBar.open('Your credentials have been updated', 'OK', {
 				duration: 2000,
 			})
@@ -36,7 +37,7 @@ ngOnInit(): void {
 			})
 		})
 		setTimeout(() => {
-			window.location.reload();
+			// window.location.reload();
 		}, 1000)
 	}
 
