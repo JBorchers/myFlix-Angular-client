@@ -25,7 +25,7 @@ export class NavBarComponent implements OnInit {
   }
 
   signOut(): void {
-    localStorage.clear;
+    localStorage.clear();
     this.router.navigate(['welcome']);
     this.snackBar.open('Logout successful!', 'OK', {
       duration: 3000
