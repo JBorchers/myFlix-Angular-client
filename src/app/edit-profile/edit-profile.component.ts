@@ -26,7 +26,7 @@ ngOnInit(): void {
   updateUser(): void {
 		this.fetchApiData.updateUser(this.newUser).subscribe(response => {
       console.log(response);
-			localStorage.setItem('username', JSON.stringify(response.user.Username));
+			localStorage.setItem('username', JSON.stringify(response.Username));
 			this.snackBar.open('Your credentials have been updated', 'OK', {
 				duration: 2000,
 			})
