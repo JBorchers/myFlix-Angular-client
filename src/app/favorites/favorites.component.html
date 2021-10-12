@@ -2,27 +2,27 @@
   <h2>Your Favorites</h2>
 </div>
 <div class="movie-container">
-  <mat-card *ngFor="let movies of FavoriteMovies;" style="flex: 1 1 auto;">
+  <mat-card *ngFor="let movies of faves;" style="flex: 1 1 auto;">
     <mat-card-header>
         <mat-card-title>{{movies.Title}}</mat-card-title>
-            <mat-card-subtitle>Directed by: {{movies.Director.Name}}</mat-card-subtitle>
+            <!-- <mat-card-subtitle>Directed by: {{movies.Director.Name}}</mat-card-subtitle> -->
         </mat-card-header>
         <img src={{movies.ImagePath}} alt= {{movies.Title}} />
         <mat-card-actions>
-            <button
+            <!-- <button
                 mat-stroked-button
                 (click)="openGenre(movies.Genre.Name, movies.Genre.Description)"
                 color="primary"
             >
                 Genre
-            </button>
-            <button
+            </button> -->
+            <!-- <button
                 mat-stroked-button
                 (click)="openDirectorDialog(movies.Director.Name, movies.Director.Bio, movies.Director.birthdate)"
                 color="primary"
             >
                 Director
-            </button>
+            </button> -->
             <button
                 mat-stroked-button
                 (click)="openMovieSynopsis(movies.Title, movies.Description, movies.ImagePath)"
@@ -30,7 +30,9 @@
             >
                 Synopsis
             </button>
-            <mat-icon>favorite_border</mat-icon>
+            <!-- <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="remove(user.username, movie._id)"> -->
+                        <mat-icon (click)="removeFromFavorites(movies._id, movies.Title)" class="favorite-button-active">favorite</mat-icon>
+                      <!-- </button> -->
         </mat-card-actions>
   </mat-card>
 </div>
