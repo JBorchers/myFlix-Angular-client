@@ -142,7 +142,7 @@ export class FetchApiDataService {
   // }
 
   
-   public addToFavoriteMoviesList(id: string): Observable<any> {
+   public addFavoriteMovie(id: string): Observable<any> {
     const user = localStorage.getItem('username');
     const token = localStorage.getItem('token');
     return this.http.post(apiUrl + `users/${user}/Movies/` + id, null, {
@@ -204,13 +204,13 @@ export class FetchApiDataService {
 	}
 
 	// Api call to update user's info
-	public updateUser(newUser: any): Observable<any> {
+	public updateUser(userData: any): Observable<any> {
 		const token = localStorage.getItem('token');
 		const username = localStorage.getItem('username');
-		console.log(newUser);
+		console.log(userData);
 		return this.http.put(
 			apiUrl + `users/${username}`,
-			newUser,
+			userData,
 			{headers: new HttpHeaders(
 				{
 					Authorization: `Bearer ${token}`,

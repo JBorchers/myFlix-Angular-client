@@ -19,7 +19,7 @@ const user = localStorage.getItem('username');
 export class FavoritesComponent implements OnInit {
   isLoading = false;
   user: any = {};
-  favorites: any = [];
+  FavoriteMovies: any = [];
   movies: any[] = [];
   faves: any[] = [];
 
@@ -40,15 +40,17 @@ export class FavoritesComponent implements OnInit {
   this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
       console.log(this.movies);
-      return this.movies;
+      return this.filterFavorites;
     });
   }
 
 
+  // get user's favorite movies
   getUsersFavs(): void {
     const user = localStorage.getItem('username');
     this.fetchApiData.getUserProfile(user).subscribe((resp: any) => {
-      this.faves = resp.Favorites;
+      this.faves = resp.FavoriteMovies;
+      // displayes favorite movies in console
       console.log(this.faves);
       return this.faves;
     });
@@ -67,10 +69,10 @@ export class FavoritesComponent implements OnInit {
   filterFavorites(): void {
     this.movies.forEach((movies: any) => {
       if (this.faves.includes(movies._id)) {
-        this.favorites.push(movies);
-      } console.log(this.favorites)
+        this.faves.push(movies);
+      } console.log(this.faves, 'faves')
     });
-    return this.favorites;
+    return this.FavoriteMovies;
   }
 
 openGenre(name: string, description: string): void {
@@ -94,8 +96,10 @@ openGenre(name: string, description: string): void {
     });
   }
 
-  postFavoriteMovies(id: string, Title: string): void {
-    this.fetchApiData.addToFavoriteMoviesList(id).subscribe((res: any) => {
+  // adds the movie to the user's favorite movies array
+
+  addFavoriteMovie(id: string, Title: string): void {
+    this.fetchApiData.addFavoriteMovie(id).subscribe((res: any) => {
       this.snackBar.open(`${Title} has been added to favorties`, 'OK', {
         duration: 3000,
       })

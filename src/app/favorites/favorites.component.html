@@ -2,7 +2,7 @@
   <h2>Your Favorites</h2>
 </div>
 <div class="movie-container">
-  <mat-card *ngFor="let movies of favorites;" style="flex: 1 1 auto;">
+  <mat-card *ngFor="let movies of FavoriteMovies;" style="flex: 1 1 auto;">
     <mat-card-header>
         <mat-card-title>{{movies.Title}}</mat-card-title>
             <mat-card-subtitle>Directed by: {{movies.Director.Name}}</mat-card-subtitle>

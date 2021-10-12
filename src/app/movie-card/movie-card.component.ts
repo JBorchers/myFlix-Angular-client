@@ -18,9 +18,10 @@ import { FavoritesComponent } from '../favorites/favorites.component';
 
 export class MovieCardComponent {
   movies: any[] = [];
-  faves: any[] = []
+  // faves: any[] = [];
+  user: any = JSON.parse(localStorage.getItem('user')!);
+  faves: any[] = this.user.FavoriteMovies;
   
-
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
@@ -61,8 +62,8 @@ getMovies(): void {
     });
   }
 
-  addToFavoriteMoviesList(id: string, Title: string): void {
-    this.fetchApiData.addToFavoriteMoviesList(id).subscribe((res: any) => {
+  addFavoriteMovie(id: string, Title: string): void {
+    this.fetchApiData.addFavoriteMovie(id).subscribe((res: any) => {
       // let favMovies = res.Favorites;
       this.snackBar.open(`${Title} has been added to favorties`, 'OK', {
         duration: 3000,
@@ -90,6 +91,7 @@ getMovies(): void {
     });
   }
 
+  // Compares movie id's with getUsersFavs list
   setFaveStatus(id: any): any {
     if (this.faves.includes(id)) {
       return true;
