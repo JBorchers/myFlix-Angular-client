@@ -33,11 +33,11 @@ ngOnInit(): void {
     this.fetchApiData.userRegistration(this.userData).subscribe((result) => {
       // Logic for successful user registration needs to be implemented here!
       this.dialogRef.close(); // will close the modal on success
-      this.snackBar.open(result, 'OK', {
+      this.snackBar.open('You are ready to login!', 'OK', {
         duration: 2000
       });
     }, (result) => {
-      this.snackBar.open(result, 'OK', {
+      this.snackBar.open('Something is not right. Please try again', 'OK', {
         duration: 2000
       });
     });
