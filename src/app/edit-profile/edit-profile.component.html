@@ -8,7 +8,7 @@
           <!-- ngModel binds the inputs by the user to the userData object-->
           <input
             matInput
-            [(ngModel)]="newUser.Username"
+            [(ngModel)]="userData.Username"
             placeholder="Username"
             type="text"
             name="Username"
@@ -17,7 +17,7 @@
           <mat-form-field>
           <input
             matInput
-            [(ngModel)]="newUser.Password"
+            [(ngModel)]="userData.Password"
             type = "password"
             placeholder="Password"
             name="Password"
@@ -26,7 +26,7 @@
         <mat-form-field>
           <input
             matInput
-            [(ngModel)]="newUser.Email"
+            [(ngModel)]="userData.Email"
             type = "email"
             placeholder="Email"
             name="Email"
@@ -35,7 +35,7 @@
         <mat-form-field>
           <input
             matInput
-            [(ngModel)]="newUser.Birthday"
+            [(ngModel)]="userData.Birthday"
             type = "date"
             placeholder="Birthday"  
             name="Birthday"

@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class EditProfileComponent implements OnInit {
 
-  @Input() newUser = { Username: '', Password: '', Email: '', Birthday: '' };
+  @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
 
  
 
@@ -24,9 +24,9 @@ ngOnInit(): void {
 
 // function responsible for sending form inputs to backend
   updateUser(): void {
-		this.fetchApiData.updateUser(this.newUser).subscribe(response => {
+		this.fetchApiData.updateUser(this.userData).subscribe(response => {
       console.log(response);
-			localStorage.setItem('username', JSON.stringify(response.Username));
+			localStorage.setItem('username', response.user.Username);
 			this.snackBar.open('Your credentials have been updated', 'OK', {
 				duration: 2000,
 			})
