@@ -42,8 +42,8 @@ export class UserLoginFormComponent implements OnInit {
         duration: 2000
       });
     }, (result) => {
-      this.snackBar.open('login unsuccessful', 'OK', {
-        duration: 2000
+      this.snackBar.open('please make sure your credentials are correct and try again', 'OK', {
+        duration: 6000
       });
       
     })
