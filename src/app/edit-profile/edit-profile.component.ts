@@ -12,8 +12,8 @@ export class EditProfileComponent implements OnInit {
 
   @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
 
- 
-
+	username = JSON.parse(localStorage.getItem('user')!).Username;
+	
 constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<EditProfileComponent>,
@@ -24,9 +24,10 @@ ngOnInit(): void {
 
 // function responsible for sending form inputs to backend
   updateUser(): void {
-		this.fetchApiData.updateUser(this.userData).subscribe(response => {
+		this.fetchApiData.updateUser(this.username, this.userData).subscribe(response => {
       console.log(response);
-			localStorage.setItem('username', response.user.Username);
+			// localStorage.setItem('username', JSON.stringify(response.Username));
+			localStorage.setItem('user', JSON.stringify(response));
 			this.snackBar.open('Your credentials have been updated', 'OK', {
 				duration: 2000,
 			})

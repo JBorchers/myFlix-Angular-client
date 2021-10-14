@@ -28,9 +28,11 @@ export class FetchApiDataService {
   	// Api call for creating new user
   	public userRegistration(userData: any): Observable<any> {
 		console.log(userData);
-		return this.http.post(apiUrl + 'users', userData).pipe(
+		return this.http.post(
+			apiUrl + 'users', userData)
+			.pipe(
 	  		catchError(this.handleError)
-		);
+			);
   	}
 
 
@@ -38,8 +40,7 @@ export class FetchApiDataService {
 	public userLogin(userData: any): Observable<any> {
 		console.log(userData);
 		return this.http.post(
-			apiUrl + 'login',
-			userData
+			apiUrl + 'login', userData
 		)
 		.pipe(
 			catchError(this.handleError)
@@ -204,9 +205,9 @@ export class FetchApiDataService {
 	}
 
 	// Api call to update user's info
-	public updateUser(userData: any): Observable<any> {
+	public updateUser(username: string, userData: any): Observable<any> {
 		const token = localStorage.getItem('token');
-		const username = localStorage.getItem('username');
+		// const username = localStorage.getItem('user.Username');
 		console.log(userData);
 		return this.http.put(
 			apiUrl + `users/${username}`,
@@ -235,19 +236,16 @@ export class FetchApiDataService {
   }
 
 	// Api call to delete a user
-	public deleteUser(username: string): Observable<any> {
-		const token = localStorage.getItem('token');
-		return this.http.delete(
-			apiUrl + `users/${username}`,
-			{headers: new HttpHeaders(
-				{
-					Authorization: `Bearer ${token}`,
-				}
-			)}
-		).pipe(
-			catchError(this.handleError)
-		);
-	}
+	public deleteUser(): Observable<any> {
+    const user = localStorage.getItem('username');
+    const token = localStorage.getItem('token');
+    return this.http.delete(apiUrl + 'users/' + user, {headers: new HttpHeaders(
+      {
+        Authorization: 'Bearer ' + token,
+      })}).pipe(
+    catchError(this.handleError)
+    );
+  }
 
 
 	// Private method
