@@ -7,6 +7,11 @@
   box-shadow: 0 0 10px 3px rgba(75, 109, 133, 0.336);
 }
 
+.mat-card-title {
+  margin-right: 20px;
+  text-align: left;
+}
+
 .mat-card:hover {
   // opacity: 0.85;
   transform: scale(1.03);
@@ -14,6 +19,19 @@
 }
 
 .mat-icon:hover {
+  cursor: pointer;
+}
+
+.favorite-button {
+  position: absolute;
+  right: 0px;
+  cursor: pointer;
+}
+
+.favorite-button-active {
+  position: absolute;
+  right: 17px;
+  color: crimson;
   cursor: pointer;
 }
 
