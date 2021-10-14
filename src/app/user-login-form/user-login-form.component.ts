@@ -42,7 +42,7 @@ export class UserLoginFormComponent implements OnInit {
         duration: 2000
       });
     }, (result) => {
-      this.snackBar.open('please make sure your credentials are correct and try again', 'OK', {
+      this.snackBar.open('please make sure your credentials are correct or click "Sign Up"', 'OK', {
         duration: 6000
       });
       
