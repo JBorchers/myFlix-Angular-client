@@ -12,9 +12,10 @@ import { EditProfileComponent } from '../edit-profile/edit-profile.component';
 })
 export class UserProfileComponent implements OnInit {
 
-  @Input() userData = {Username: '', Password: '', Email: '', Birthday: ''};
+  // @Input() userData = {Username: '', Password: '', Email: '', Birthday: ''};
 
   user = JSON.parse(localStorage.getItem('user')!);
+  // user: any = {};
 
   constructor(
   public fetchApiData: FetchApiDataService,
@@ -24,20 +25,33 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getUser();
+    // this.getUser();
   }
 
-  getUser(): void {
-    // let user = localStorage.getItem('UserName');
-    // this.fetchApiData.getUser().subscribe((res: any) => {
-    //   this.user = res;
-    // });
-  }
+  // getUser(): void {
+  //   let user = localStorage.getItem('username');
+  //   this.fetchApiData.getUser(user).subscribe((res: any) => {
+  //     this.user = res;
+  //   });
+  // }
   
   openUserUpdateDialog(): void {
     this.dialog.open(EditProfileComponent, {
       width: '400px'
     });
   }
+
+  deleteProfile(): void {
+    if(confirm('Are you sure you want to delete your account?')) {
+    this.fetchApiData.deleteUser().subscribe(() => {
+      localStorage.clear();
+      this.router.navigate(['welcome']);
+      this.snackBar.open('Account Deleted', 'OK', {
+        duration: 3000
+        });
+      });
+    }
+  }
+
 }
 
