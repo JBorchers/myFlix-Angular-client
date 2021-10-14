@@ -126,7 +126,7 @@ openGenre(name: string, description: string): void {
         duration: 3000,
       })
       setTimeout(function () {
-        window.location.reload();
+        // window.location.reload();
       }, 3500);
       this.getUsersFavs();
       return this.favMoviesId = JSON.parse(localStorage.getItem('user')!).FavoriteMovies;
