@@ -235,6 +235,22 @@ export class FetchApiDataService {
     );
   }
 
+// public deleteUser(): Observable<any> {
+// 		const token = localStorage.getItem('token');
+// 		const user = localStorage.getItem('username');
+// 		return this.http.delete(
+// 			apiUrl + `users/${user}`,
+// 			{headers: new HttpHeaders(
+// 				{
+// 					Authorization: `Bearer ${token}`,
+// 				}
+// 			)}
+// 		).pipe(
+// 			map(this.extractResponseData),
+// 			catchError(this.handleError)
+// 		);
+// 	}
+
 	// Api call to delete a user
 	public deleteUser(): Observable<any> {
     const user = localStorage.getItem('username');

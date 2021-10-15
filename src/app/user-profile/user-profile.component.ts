@@ -45,11 +45,14 @@ export class UserProfileComponent implements OnInit {
     if(confirm('Are you sure you want to delete your account?')) {
     this.fetchApiData.deleteUser().subscribe(() => {
       localStorage.clear();
-      this.router.navigate(['welcome']);
+      // this.router.navigate(['welcome']);
       this.snackBar.open('Account Deleted', 'OK', {
         duration: 3000
         });
-      });
+      })
+      setTimeout(() => {
+				this.router.navigate(['/welcome']);
+			}, 2000)
     }
   }
 
