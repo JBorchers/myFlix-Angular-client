@@ -29,7 +29,7 @@ import { MovieGenreComponent } from './movie-genre/movie-genre.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MovieSynopsisComponent } from './movie-synopsis/movie-synopsis.component';
-import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { EditProfileComponent } from './user-profile/edit-profile/edit-profile.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 
 const appRoutes: Routes = [
