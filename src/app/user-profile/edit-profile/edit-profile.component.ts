@@ -43,6 +43,7 @@ ngOnInit(): void {
 		setTimeout(() => {
 				this.router.navigate(['/welcome']);
 			}, 2000)
+			this.dialogRef.close();
 	}
 
 }
