@@ -14,8 +14,8 @@ export class UserProfileComponent implements OnInit {
 
   // @Input() userData = {Username: '', Password: '', Email: '', Birthday: ''};
 
-  user = JSON.parse(localStorage.getItem('user')!);
-  // user: any = {};
+  // user = JSON.parse(localStorage.getItem('user')!);
+  user: any = {};
 
   constructor(
   public fetchApiData: FetchApiDataService,
@@ -25,15 +25,15 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.getUser();
+    this.getUser();
   }
 
-  // getUser(): void {
-  //   let user = localStorage.getItem('username');
-  //   this.fetchApiData.getUser(user).subscribe((res: any) => {
-  //     this.user = res;
-  //   });
-  // }
+  getUser(): void {
+    let user = localStorage.getItem('username');
+    this.fetchApiData.getUser(user).subscribe((res: any) => {
+      this.user = res;
+    });
+  }
   
   openUserUpdateDialog(): void {
     this.dialog.open(EditProfileComponent, {
