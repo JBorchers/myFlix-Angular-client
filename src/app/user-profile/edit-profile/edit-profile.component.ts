@@ -2,11 +2,13 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FetchApiDataService } from '../../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.scss']
+  styleUrls: ['./edit-profile.component.scss',]
 })
 export class EditProfileComponent implements OnInit {
 
@@ -17,7 +19,8 @@ export class EditProfileComponent implements OnInit {
 constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<EditProfileComponent>,
-    public snackBar: MatSnackBar) { }
+    public snackBar: MatSnackBar,
+		public router: Router) { }
 
 ngOnInit(): void {
 }
@@ -38,8 +41,8 @@ ngOnInit(): void {
 			})
 		})
 		setTimeout(() => {
-			// window.location.reload();
-		}, 1000)
+				this.router.navigate(['/welcome']);
+			}, 2000)
 	}
 
 }
