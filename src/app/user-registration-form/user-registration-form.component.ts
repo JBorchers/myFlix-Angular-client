@@ -16,30 +16,36 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './user-registration-form.component.html',
   styleUrls: ['./user-registration-form.component.scss']
 })
+
+/**
+* This class represents the registration form
+*/
 export class UserRegistrationFormComponent implements OnInit {
-
+  
   @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
-
-constructor(
+  
+  constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
     public snackBar: MatSnackBar) { }
-
-ngOnInit(): void {
-}
-
-// function responsible for sending form inputs to backend
-  registerUser(): void {
-    this.fetchApiData.userRegistration(this.userData).subscribe((result) => {
-      // Logic for successful user registration needs to be implemented here!
-      this.dialogRef.close(); // will close the modal on success
-      this.snackBar.open('You are ready to login!', 'OK', {
-        duration: 2000
+    
+    ngOnInit(): void {
+    }
+    
+    /**
+    * Method responsible for sending registration form inputs to backend
+    */
+    registerUser(): void {
+      this.fetchApiData.userRegistration(this.userData).subscribe((result) => {
+        // Logic for successful user registration needs to be implemented here!
+        this.dialogRef.close(); // will close the modal on success
+        this.snackBar.open('You are ready to login!', 'OK', {
+          duration: 2000
+        });
+      }, (result) => {
+        this.snackBar.open('Something is not right. Please try again', 'OK', {
+          duration: 2000
+        });
       });
-    }, (result) => {
-      this.snackBar.open('Something is not right. Please try again', 'OK', {
-        duration: 2000
-      });
-    });
-  }
+    }
   }

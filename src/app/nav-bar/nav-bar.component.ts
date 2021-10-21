@@ -7,6 +7,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss']
 })
+
+
+/**
+ * This class is the Navigation Bar
+ */
 export class NavBarComponent implements OnInit {
 
   userDetails: any;
@@ -24,6 +29,9 @@ export class NavBarComponent implements OnInit {
     this.userDetails = JSON.parse(localStorage.getItem('user')!);
   }
 
+  /**
+	 * Signout method that clears the local storage and navigates back to Welcome screen
+	 */
   signOut(): void {
     localStorage.clear();
     this.router.navigate(['welcome']);

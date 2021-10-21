@@ -17,128 +17,114 @@ const user = localStorage.getItem('username');
   styleUrls: ['./favorites.component.scss']
 })
 
+/**
+* This class represents the user's list of favorite movies
+*/
 export class FavoritesComponent implements OnInit {
   isLoading = false;
-  // user: any = {};
   user: any = JSON.parse(localStorage.getItem('user')!);
-  // FavoriteMovies: any = [];
   faves: any[] = [];
-  // faves: any[] = [];
   favMoviesId = this.user.FavoriteMovies;
   favMoviesIdLength: number = this.favMoviesId.length;
-
-
+  
+  
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
     public router: Router,
-  ) { }
-
-  ngOnInit(): void {
-    // this.getMovies();
-    this.getUsersFavs();
-  }
-
-
-  // getMovies(): void {
-  // this.fetchApiData.getAllMovies().subscribe((resp: any) => {
-  //     this.faves = resp;
-  //     console.log(this.faves);
-  //     return this.filterFavorites;
-  //   });
-  // }
-
-
-  // get user's favorite movies
-  getUsersFavs(): void {
-    this.fetchApiData.getAllMovies().subscribe((response: any) => {
-			this.faves = response.filter((m:any) => {
-				return this.favMoviesId.indexOf(m._id) >= 0;
-			});
-		})
-	}
-
-
-
-
-  
-
-  // getUserProfile(): void {
-  //   let user = localStorage.getItem('username');
-  //   this.fetchApiData.getUserProfile(user).subscribe((res: any) => {
-  //     this.user = res;
-  //   });
-  // }
-
-
-
-  // Filters movies to display only the users favorites
-  filterFavorites(): void {
-    this.faves.forEach((movies: any) => {
-      if (this.faves.includes(movies._id)) {
-        this.faves.push(movies);
-      } console.log(this.faves, 'faves')
-    });
-    return this.user.FavoriteMovies;
-  }
-
-
-
-
-
-openGenre(name: string, description: string): void {
-    this.dialog.open(MovieGenreComponent, {
-      data: {name, description},
-      width: '650px'
-    });
-  }
-
-  openDirectorDialog(name: string, bio: string, birthyear: string): void {
-    this.dialog.open(MovieDirectorComponent, {
-      data: {name, bio, birthyear},
-      width: '650px'
-    })
-  }
-
-  openMovieSynopsis(Title: string, description: string, imagePath: any): void {
-    this.dialog.open(MovieSynopsisComponent, {
-      data: { Title, description, ImagePath: imagePath },
-      width: '650px'
-    });
-  }
-
-  // adds the movie to the user's favorite movies array
-
-  // addFavoriteMovie(id: string, Title: string): void {
-  //   this.fetchApiData.addFavoriteMovie(id).subscribe((res: any) => {
-  //     this.snackBar.open(`${Title} has been added to favorties`, 'OK', {
-  //       duration: 3000,
-  //     })
-  //     return this.getUsersFavs();
-  //   })
-  // }
-
-  removeFromFavorites(id: string, Title: string): void {
-    this.fetchApiData.removeFavoriteMovie(id).subscribe(response => {
-			localStorage.setItem('user', JSON.stringify(response));
-      this.snackBar.open(`${Title} has been removed from favorties`, 'OK', {
-        duration: 3000,
-      })
-      setTimeout(function () {
-        // window.location.reload();
-      }, 3500);
+    ) { }
+    
+    ngOnInit(): void {
+      // this.getMovies();
       this.getUsersFavs();
-      return this.favMoviesId = JSON.parse(localStorage.getItem('user')!).FavoriteMovies;
-    })
+    }
+    
+    
+    /**
+    *  Method that makes an API call to fetch all movies
+    *  The results are filtered based on "favMoviesId", a property of this class
+    */
+    getUsersFavs(): void {
+      this.fetchApiData.getAllMovies().subscribe((response: any) => {
+        this.faves = response.filter((m:any) => {
+          return this.favMoviesId.indexOf(m._id) >= 0;
+        });
+      })
+    }
+    
+    
+    /**
+    * Method to filter movies list based on a favorite's id
+    * @returns user's favorite movies
+    */
+    filterFavorites(): void {
+      this.faves.forEach((movies: any) => {
+        if (this.faves.includes(movies._id)) {
+          this.faves.push(movies);
+        } console.log(this.faves, 'faves')
+      });
+      return this.user.FavoriteMovies;
+    }
+        
+    
+    /**
+     * Method that opens genre dialog
+     * @param name 
+     * @param description 
+     */
+    openGenre(name: string, description: string): void {
+      this.dialog.open(MovieGenreComponent, {
+        data: {name, description},
+        width: '650px'
+      });
+    }
+    
+
+    /**
+     * Method that opens director dialog
+     * @param name 
+     * @param bio
+     */
+    openDirectorDialog(name: string, bio: string): void {
+      this.dialog.open(MovieDirectorComponent, {
+        data: {name, bio},
+        width: '650px'
+      })
+    }
+    
+
+    /**
+     * Method that opens movie synopsis
+     * @param Title 
+     * @param description 
+     * @param imagePath 
+     */
+    openMovieSynopsis(Title: string, description: string, imagePath: any): void {
+      this.dialog.open(MovieSynopsisComponent, {
+        data: { Title, description, ImagePath: imagePath },
+        width: '650px'
+      });
+    }
+    
+    
+    /**
+     * Method that removes a movie from favorites from within this component
+     * @param id
+     * @param Title 
+     */
+    removeFromFavorites(id: string, Title: string): void {
+      this.fetchApiData.removeFavoriteMovie(id).subscribe(response => {
+        localStorage.setItem('user', JSON.stringify(response));
+        this.snackBar.open(`${Title} has been removed from favorties`, 'OK', {
+          duration: 3000,
+        })
+        setTimeout(function () {
+          // window.location.reload();
+        }, 3500);
+        this.getUsersFavs();
+        return this.favMoviesId = JSON.parse(localStorage.getItem('user')!).FavoriteMovies;
+      })
+    }
+    
   }
-
-  // setFaveStatus(id: any): any {
-  //   if (this.faves.includes(id)) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
-
-}

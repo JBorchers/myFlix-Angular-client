@@ -6,44 +6,53 @@ import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'app-edit-profile',
-  templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.scss',]
+	selector: 'app-edit-profile',
+	templateUrl: './edit-profile.component.html',
+	styleUrls: ['./edit-profile.component.scss',]
 })
+
+
+/**
+* This class represents a form that a user can use to updata user data. It is a child component of user-profile
+*/
 export class EditProfileComponent implements OnInit {
-
-  @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
-
+	
+	@Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
+	
 	username = JSON.parse(localStorage.getItem('user')!).Username;
 	
-constructor(
-    public fetchApiData: FetchApiDataService,
-    public dialogRef: MatDialogRef<EditProfileComponent>,
-    public snackBar: MatSnackBar,
+	constructor(
+		public fetchApiData: FetchApiDataService,
+		public dialogRef: MatDialogRef<EditProfileComponent>,
+		public snackBar: MatSnackBar,
 		public router: Router) { }
-
-ngOnInit(): void {
-}
-
-// function responsible for sending form inputs to backend
-  updateUser(): void {
-		this.fetchApiData.updateUser(this.username, this.userData).subscribe(response => {
-      console.log(response);
-			// localStorage.setItem('username', JSON.stringify(response.Username));
-			localStorage.setItem('user', JSON.stringify(response));
-			this.snackBar.open('Your credentials have been updated', 'OK', {
-				duration: 2000,
+		
+		ngOnInit(): void {
+		}
+		
+		
+		/**
+		 * Method that sends inputs from the form to the database
+		 * Updatd database information is represented on the profile component
+		 */
+		updateUser(): void {
+			this.fetchApiData.updateUser(this.username, this.userData).subscribe(response => {
+				console.log(response);
+				// localStorage.setItem('username', JSON.stringify(response.Username));
+				localStorage.setItem('user', JSON.stringify(response));
+				this.snackBar.open('Your credentials have been updated', 'OK', {
+					duration: 2000,
+				})
+			}, (response) => {
+				console.log(response);
+				this.snackBar.open('Try again', 'OK', {
+					duration: 2000,
+				})
 			})
-		}, (response) => {
-			console.log(response);
-			this.snackBar.open('Try again', 'OK', {
-				duration: 2000,
-			})
-		})
-		setTimeout(() => {
+			setTimeout(() => {
 				this.router.navigate(['/welcome']);
 			}, 2000)
 			this.dialogRef.close();
+		}
+		
 	}
-
-}
