@@ -2,8 +2,8 @@
   display: flex;
   min-height: 50%;
   flex-direction: column;
-  margin: 130px;
-  margin-top: 50px;
+  margin: 50px 50px 130px;
+  text-align: center;
   flex-wrap: wrap;
   align-items: center;
   background-color: rgb(0, 0, 0);
@@ -32,7 +32,7 @@ h1 {
 
 
 @media all and (max-width: 750px) {
-  .main-page[_ngcontent-dyi-c52] {
+  div .main-page {
     margin: 51px 16px -2px;
     text-align: center;
   }
